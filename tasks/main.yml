@@ -1,0 +1,77 @@
+---
+  - name: find docker app
+    shell: "which docker"
+    register: docker_install
+    ignore_errors: yes
+    tags:
+      - all
+
+  - name: check docker installation
+    meta: end_host
+    when: docker_install.rc != 0
+    ignore_errors: yes
+    tags:
+      - all
+      - preinstall
+
+
+  - import_tasks: redhat.yaml
+    when: ansible_facts.os_family | lower =='redhat'
+  
+  - import_tasks: debian.yaml
+    when: ansible_facts.os_family | lower =='debian'
+    
+
+  - name: Enable and Start Docker Service
+    systemd: 
+      name: docker
+      enabled: yes
+      state: started
+    tags:
+      - all
+      - install
+ 
+
+  - name: Check docker version
+    shell: "docker --version"
+    ignore_errors: yes
+    register: docker_ver
+    tags: 
+      - all
+      - install
+      - info
+      - check_ver
+
+
+  - name: Check Docker Service
+    shell: "systemctl status docker.service"
+    register: service_status
+    ignore_errors: yes
+    tags:
+      - all
+      - install
+      - info
+      - check_service
+
+  - name: show docker service status
+    debug:
+      msg: "Service info:{{ service_status.stdout_lines[2] }}"
+    tags:
+      - all
+      - install
+      - info
+      - check_service
+
+
+
+  - name: show Docker version
+    debug:
+      msg: "{{ docker_ver.stdout }} installed on  {{ ansible_facts.hostname}}, IP = {{ansible_facts.all_ipv4_addresses[0] }} "
+    tags:
+      - all
+      - install
+      - info
+      - check_ver
+    
+
+  
