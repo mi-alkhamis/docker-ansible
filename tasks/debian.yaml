@@ -1,0 +1,58 @@
+---
+  - name: update apt cache, upgrade systems
+    apt:
+      update_cache: yes
+      upgrade: full
+      cache_valid_time: 3600
+      state: present
+    tags:
+      - all
+      - preinstall
+      - update cache
+
+
+  - name: install some prerequisites
+    apt:
+      pkg:
+        - apt-transport-https 
+        - ca-certificates 
+        - gnupg
+    tags:
+      - all
+      - preinstall   
+      - install-pre 
+
+
+
+  - name: Add Docker GPG
+    apt_key:
+      url: "{{ docker_debian_repo.keyserver }}"
+      state: present
+    tags:
+      - all
+      - add_gpg
+      - preinstall
+
+
+  - name: Add Docker repository & update apt cache
+    apt_repository:
+      repo: "{{ docker_debian_repo.url }}"
+      state: present     
+      update_cache: yes
+      filename: docker
+    tags:
+      - all
+      - preinstall
+      - add_repo
+         
+                 
+  - name: install docker
+    apt:
+      name: "{{ docker_packages }}"
+      state: latest
+      autoremove: yes
+    tags:
+      - all
+      - install
+    
+        
