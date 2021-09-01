@@ -1,0 +1,35 @@
+galaxy_info:
+  author: Milad Alkhamis
+  description: Install Docker on Debain-based and RedHat-based distribution
+  license: GPL-3.0 License 
+
+  min_ansible_version: 2.1
+
+  
+   platforms:
+  - name: CentOS
+    versions:
+    - 8
+    - 7
+  - name: Ubuntu
+    versions:
+    - Focal
+    - Bionic
+  
+  - name: Debian
+    versions:
+    - Buster
+    - Bullseye
+  
+  - name: RHEL
+    versions:
+    - 8
+    - 7
+  
+  galaxy_tags:
+  - docker
+  - install-docker
+  - container
+  - vm
+  - virtualization
+    
