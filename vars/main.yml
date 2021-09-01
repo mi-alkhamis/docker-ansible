@@ -1,0 +1,14 @@
+---
+docker_debian_repo:
+  url: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} stable"
+  keyserver: "https://download.docker.com/linux/{{ ansible_os_family | lower }}/gpg"
+  
+  
+docker_redhat_repo:
+  url: "https://download.docker.com/linux/centos/docker-ce.repo"
+
+  
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
