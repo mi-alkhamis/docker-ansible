@@ -6,25 +6,25 @@ galaxy_info:
   min_ansible_version: 2.1
 
   
-   platforms:
-  - name: CentOS
-    versions:
-    - 8
-    - 7
-  - name: Ubuntu
-    versions:
-    - Focal
-    - Bionic
+  platforms:
+    - name: CentOS
+      versions:
+        - 8
+        - 7
+    - name: Ubuntu
+      versions:
+        - Focal
+        - Bionic
   
-  - name: Debian
-    versions:
-    - Buster
-    - Bullseye
+    - name: Debian
+      versions:
+        - Buster
+        - Bullseye
   
-  - name: RHEL
-    versions:
-    - 8
-    - 7
+    - name: RHEL
+      versions:
+        - 8
+        - 7
   
   galaxy_tags:
   - docker

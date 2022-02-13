@@ -8,7 +8,7 @@
 
   - name: check docker installation
     meta: end_host
-    when: docker_install.rc != 0
+    when: docker_install.rc == 0
     ignore_errors: yes
     tags:
       - all
